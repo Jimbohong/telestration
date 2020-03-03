@@ -2,33 +2,47 @@
   <div class="hello">
     <h1>傳情畫意</h1>
     <!-- <h3>題庫</h3> -->
-    <!-- <div v-for="item in topic" :key="item">
-      {{item}}
+    <!-- {{this.topic}} -->
+    <!-- <div v-for="item in this.topic" :key="item.item">
+      {{item.item}}
     </div> -->
+    <img src="./../assets/boaz.png" alt="BOAZ">
     <hr>
     <h3>結果: {{this.result}}</h3>
-    <button @click="randomTopic"><h1>Random Topic</h1></button>
+    <br>
+    <!-- <button @click="randomTopic"><h1>Random Topic</h1></button> -->
+    <button @click="randomTopic" type="button" class="btn btn-light">Random Topic</button>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  },
+  name: 'HelloWorld',  
   data() {
     return{
-      topic: ['習近平','金正恩','耿爽','小虎隊','館長','隱形人','洪金寶','scrum of scrum','紫禁之巔','夜市人生','寄生上流','R&R','拉斯維加斯','韓國','路易莎','婚宴蟑螂'],
+      topic: {},
       result: ''
     }
   },
   methods:{
     randomTopic(){
       let result = Math.floor(Math.random() * this.topic.length);
-      console.log(this.topic[result]);
-      this.result = this.topic[result];
+      let final = "";
+      for(let i =0; i<this.topic.length; i++){
+        if(i== result){
+          final = this.topic[i].item
+          console.log(final);
+          
+        }
+      }
+      this.result = final
     }
+  },
+  mounted () {
+    axios
+      .get('https://script.googleusercontent.com/macros/echo?user_content_key=1j3v9XvmAWKq512en-LLDVpKw43zULn7TgXdljBBdRaLfOGNpeFB_YqZhyEBmPLMDto28QVzTMpjjuwCnmQehgwGVsXiD7Bjm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnMtWSvurxVeV-K0dxmR31Gm-uOwAOgBYT1nsyRNU2dK0tVCJEe5wZjH3QZmleUkDXGX_kaSHpVtx&lib=MeGKzyIaPnJLaYAhkGPuAsIKA7t3_4itk')
+      .then(response => (this.topic = response.data.user))
   }
   
 }
