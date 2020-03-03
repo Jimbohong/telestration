@@ -1,10 +1,10 @@
 <template>
   <div class="hello">
     <h1>傳情畫意</h1>
-    <h3>題庫</h3>
-    <div v-for="item in topic" :key="item">
+    <!-- <h3>題庫</h3> -->
+    <!-- <div v-for="item in topic" :key="item">
       {{item}}
-    </div>
+    </div> -->
     <hr>
     <h3>結果: {{this.result}}</h3>
     <button @click="randomTopic"><h1>Random Topic</h1></button>
