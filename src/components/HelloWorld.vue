@@ -8,10 +8,13 @@
     </div> -->
     <img src="./../assets/boaz.png" alt="BOAZ">
     <hr>
-    <h3>結果: {{this.result}}</h3>
+    <div class="wrapper">
+      <p>你的題目是:</p>
+      <h3>{{this.result}}</h3>
+    </div>
     <br>
     <!-- <button @click="randomTopic"><h1>Random Topic</h1></button> -->
-    <button @click="randomTopic" type="button" class="btn btn-light">Random Topic</button>
+    <button @click="randomTopic" type="button" class="btn">納命來</button>
   </div>
 </template>
 
