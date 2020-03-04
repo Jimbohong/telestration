@@ -10,11 +10,12 @@
     <hr>
     <div class="wrapper">
       <p>你的題目是:</p>
-      <h3>{{this.result}}</h3>
+      <h4>{{this.result}}</h4>
     </div>
     <br>
     <!-- <button @click="randomTopic"><h1>Random Topic</h1></button> -->
-    <button @click="randomTopic" type="button" class="btn">納命來</button>
+    <button @click="randomTopic" type="button" class="btn" v-bind:class="{disable: this.count>1}">{{getCount()}}</button>
+    <footer>AJA@2020 傳情畫意 v1.1</footer>
   </div>
 </template>
 
@@ -25,10 +26,21 @@ export default {
   data() {
     return{
       topic: {},
-      result: ''
+      result: '',
+      count:0
     }
   },
   methods:{
+    getCount(){
+      let val = this.count;
+      if(val === 0){
+        return '納命來'
+      }else if(val === 1){
+        return '太難了，再一次'
+      }else{
+        return '不能換了'
+      }
+    },
     randomTopic(){
       let result = Math.floor(Math.random() * this.topic.length);
       let final = "";
@@ -39,7 +51,9 @@ export default {
           
         }
       }
+      this.count ++;
       this.result = final
+      console.log(this.count);
     }
   },
   mounted () {
